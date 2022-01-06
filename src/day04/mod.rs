@@ -56,7 +56,7 @@ pub fn solve(path: &Path) {
     let mut i = 0;
     let winning_board: usize;
 
-    'main_loop: loop {
+    'main_loop_1: loop {
         let draw = draws[i];
 
         for (board, row, column) in &adj[draw as usize] {
@@ -65,12 +65,12 @@ pub fn solve(path: &Path) {
 
             if row_counters[*board][*row] == 5 {
                 winning_board = *board;
-                break 'main_loop;
+                break 'main_loop_1;
             }
 
             if column_counters[*board][*column] == 5 {
                 winning_board = *board;
-                break 'main_loop;
+                break 'main_loop_1;
             }
         }
         i += 1;
@@ -90,7 +90,7 @@ pub fn solve(path: &Path) {
     let mut row_counters_2 = vec![[0; 5]; boards.len()];
     let mut column_counters_2 = vec![[0; 5]; boards.len()];
 
-    'main_loop: while remaining_boards.len() != 1 {
+    while remaining_boards.len() != 1 {
         let draw = draws[i];
         for (board, row, column) in &adj[draw as usize] {
             row_counters_2[*board][*row] += 1;
@@ -109,7 +109,7 @@ pub fn solve(path: &Path) {
     let losing_board = remaining_boards.iter().next().unwrap();
 
     // figure out when board wins
-    'main_loop: loop {
+    'main_loop_2: loop {
         let draw = draws[i];
         for (board, row, column) in &adj[draw as usize] {
             if *board != *losing_board {
@@ -120,11 +120,11 @@ pub fn solve(path: &Path) {
             column_counters_2[*board][*column] += 1;
 
             if row_counters_2[*board][*row] == 5 {
-                break 'main_loop;
+                break 'main_loop_2;
             }
 
             if column_counters_2[*board][*column] == 5 {
-                break 'main_loop;
+                break 'main_loop_2;
             }
         }
         i += 1;
