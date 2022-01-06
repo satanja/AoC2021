@@ -1,5 +1,4 @@
-#![allow(non_snake_case)]
-#![allow(dead_code)]
+#![allow(warnings, unused)]
 
 use std::path::Path;
 
@@ -8,8 +7,9 @@ mod day02;
 mod day03;
 mod day04;
 mod day05;
+mod day06;
 
 fn main() {
-    let path = Path::new("./src/day05/input.txt");
-    day05::solve(path);
+    let path = Path::new("./src/day06/input.txt");
+    day06::solve(path);
 }
